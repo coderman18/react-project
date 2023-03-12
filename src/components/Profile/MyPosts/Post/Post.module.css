@@ -1,0 +1,35 @@
+.post {
+    background-color: rgb(67, 98, 165);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    /* gap: 10px; */
+    /* margin-bottom: 10px; */
+    /* width: 40%; */
+    border-radius: 10px;
+    opacity: 0.9;
+    padding: 10px;
+    box-shadow: 5px 5px 5px #222;
+    box-shadow: -3px 3px 3px #0386f1;
+    margin-bottom: 20px;
+}
+
+.post:hover {
+    box-shadow: -5px 5px 5px #1f1;
+    transition: all ease .3s;
+}
+.post img {
+    width: 60px;
+    border-radius: 10px;
+    box-shadow: -3px 3px 3px #0386f1;
+}
+
+.post img:hover {
+    box-shadow: -3px 3px 3px #1f1;
+    transition: all ease .3s;
+}
+
+.postLikes {
+    padding: 5px;
+    
+}
