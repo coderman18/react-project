@@ -1,5 +1,9 @@
 .post {
-    padding-left: 28px;
+    padding: 28px;
     font-size: 18px;
   
+}
+
+.blockPosts {
+    margin: 10px 0;
 }

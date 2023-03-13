@@ -3,7 +3,9 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogItem {
+.dialogItems {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
 }
 
