@@ -3,9 +3,5 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogItems {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
+
 
