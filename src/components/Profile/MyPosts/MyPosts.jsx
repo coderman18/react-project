@@ -2,20 +2,28 @@ import React from 'react'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/state';
+
+
+
 const MyPosts = (props) => {
 
-    let postData = [
-        {id: 1, message: 'Hi, how are you?', likesCount: 50},
-        {id: 2, message: 'Hello!!', likesCount: 19},
-        {id: 3, message: 'What you doing?', likesCount: 28},
-        {id: 4, message: 'Help me please', likesCount: 32},
-        {id: 5, message: 'This is very interesting themes...', likesCount: 46},
-    ]
-
-    let postsElements = postData
-        .map(p => <Post 
-            message={p.message} 
+    let postsElements = props.posts.map(p => <Post 
+            message={p.posts} 
             likesCount={p.likesCount}/>)
+
+    let newPostElement = React.createRef();
+
+    let addPost = () =>  {
+        props.dispatch(addPostActionCreator());
+        
+    }
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        let action = updateNewPostTextActionCreator(text);
+        props.dispatch(action);
+    }
 
     return (
         <div className={styles.post}>
@@ -24,10 +32,16 @@ const MyPosts = (props) => {
             </div>
             <div className={styles.blockPosts}>
                 <div>
-                    <textarea></textarea>
+                    <textarea 
+                        placeholder='оставьте свое сообщение'
+                        onChange={onPostChange}
+                        ref={newPostElement} 
+                        value={props.newPostText} />
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button
+                        onClick={addPost}
+                    >Add post</button>
                 </div>
             </div>
             {postsElements}

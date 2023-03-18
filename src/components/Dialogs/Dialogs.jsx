@@ -2,37 +2,28 @@ import React from 'react'
 import DialogItems from './DialogItems/DialogItems'
 import MessageItems from './MessageItems/MessageItems'
 import styles from './Dialogs.module.css'
+import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/state'
 
 
 
-const Dialog = (props) => {
+const Dialogs = (props) => {
 
-    let dialogData = [
-        {id: 1, name: 'Pavel'},
-        {id: 2, name: 'Sveta'},
-        {id: 3, name: 'Peter'},
-        {id: 4, name: 'Ivan'},
-        {id: 5, name: 'Helen'}
-    ]
+    let state = props.store.getState().dialogPage;
 
-    let dialogElements = dialogData
-        .map(d => <DialogItems 
-            name={d.name} 
-            id={d.id} />)
+    let dialogElements = state.dialogs.map(d => <DialogItems name={d.name} id={d.id} />)
 
-    let messageData = [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'Were you go?'},
-        {id: 4, message: 'You can help me?'},
-        {id: 5, message: 'This good time for choose....'}, 
-    ]
+    let messageElements = state.messages.map(m => <MessageItems message={m.message} id={m.id} />) 
 
-    let messageElements = messageData
-        .map(m => <MessageItems 
-            message={m.message} 
-            id={m.id} />) 
+    let newMessageBody = state.newMessageBody;
 
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator());
+    }
+
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body));
+    }
 
     return (
         <div className={styles.dialogs}>
@@ -40,10 +31,22 @@ const Dialog = (props) => {
                 {dialogElements}
             </div>
             <div className={styles.messageItems}>
-                {messageElements}
+                <div>{messageElements}</div>
+            </div>
+            <div className={styles.blockMessages}>
+                <div>
+                    <textarea 
+                        value={newMessageBody}
+                        onChange={onNewMessageChange}
+                        placeholder='Введите текст сообщения'></textarea>
+                </div>
+                <div>
+                    <button
+                        onClick={onSendMessageClick}>Add message</button>
+                </div>
             </div>
         </div>
     )
 }
 
-export default Dialog;
+export default Dialogs;

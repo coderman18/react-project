@@ -4,5 +4,5 @@
   }
 
 .profileInfo img {
-    width: 800px;
+    max-width: 600px;
 }  
